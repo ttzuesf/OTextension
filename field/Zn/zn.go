@@ -1,4 +1,4 @@
-// Zn implements an integer ring, the N is prime number Zn is a prime field
+// Zn implements an integer ring, the N is integer number Zn is a integer field
 package Zn
 
 import (
@@ -7,7 +7,7 @@ import (
 )
 
 type Zn struct {
-	N    *big.Int `json:"n"`    // prime number
+	N    *big.Int `json:"n"`    // integer number
 	Bits int      `json:"bits"` // bits size
 }
 

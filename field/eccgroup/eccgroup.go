@@ -18,7 +18,7 @@ type Point struct {
 
 type Curve struct {
 	curv elliptic.Curve
-	P    *big.Int // A prime number to construct Fp
+	P    *big.Int // A integer number to construct Fp
 	N    *big.Int // The order of elliptic curve group
 	zero *big.Int
 	G    *Point //  The base point

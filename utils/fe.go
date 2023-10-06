@@ -6,5 +6,5 @@ import (
 )
 
 type Field_element interface {
-	pfield.Pfield | eccgroup.ECCfield
+	pfield.Pfield | eccgroup.Curve
 }

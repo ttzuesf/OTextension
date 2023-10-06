@@ -1,0 +1,4 @@
+github.com/andreburgaud/crypt2go v1.4.0 h1:i2zy+SmjKlQ22eGMR8pIOgrp8OJwbEYp/TVKIcJJBY4=
+github.com/andreburgaud/crypt2go v1.4.0/go.mod h1:MVXF4rq1q0igLFpdb+XW1DfIIgvbSsswGRUwwFbzcnc=
+github.com/rossmerr/bitvector v0.0.0-20230307153838-e3c616ef0f0b h1:z1kwfEYH0Lox9/CeghgERMyk8VMKiSDJY9CtXQ8aCc8=
+github.com/rossmerr/bitvector v0.0.0-20230307153838-e3c616ef0f0b/go.mod h1:SspG0ls/bZbhrZZh2jmLXxtfk9Chif7C+acDx1qT1KM=

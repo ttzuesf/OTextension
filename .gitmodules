@@ -1,0 +1,6 @@
+[submodule "module/ctest/extern/relic"]
+	path = module/ctest/extern/relic
+	url = git@github.com:relic-toolkit/relic.git
+[submodule "module/ctest/extern/ENCRYPTO_utils"]
+	path = module/ctest/extern/ENCRYPTO_utils
+	url = git@github.com:encryptogroup/ENCRYPTO_utils.git

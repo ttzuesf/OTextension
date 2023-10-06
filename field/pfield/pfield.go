@@ -217,20 +217,3 @@ func ImportField(filename string, field *Pfield) error {
 	field.k = field.Pr.BitLen()
 	return nil
 }
-
-func GeneratePrimeNumber(bitsize int) *big.Int {
-	A := new(big.Int)
-	one := big.NewInt(1)
-	two := big.NewInt(2)
-	res := new(big.Int)
-	for {
-		pri, _ := rand.Prime(rand.Reader, bitsize) //p=2q+1, where q is a prime number
-		res.Mul(pri, one)
-		res.Div(res, two)
-		if res.ProbablyPrime(10000) == true {
-			A.Set(pri)
-			break
-		}
-	}
-	return A
-}

@@ -1,8 +1,8 @@
 package SimpleOT
 
 import (
-	"github.com/ttzuef/ot/goot/field/pfield"
-	"github.com/ttzuef/ot/goot/utils"
+	"github.com/ttzuesf/goot/field/pfield"
+	"github.com/ttzuesf/goot/utils"
 	"log"
 	"strconv"
 	"testing"

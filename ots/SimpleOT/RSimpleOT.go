@@ -5,9 +5,9 @@ package SimpleOT
 import (
 	"crypto/rand"
 	"errors"
-	"github.com/ttzuef/ot/goot/crypt"
-	"github.com/ttzuef/ot/goot/crypt/AES"
-	"github.com/ttzuef/ot/goot/field/pfield"
+	"github.com/ttzuesf/goot/crypt"
+	"github.com/ttzuesf/goot/crypt/AES"
+	"github.com/ttzuesf/goot/field/pfield"
 	"log"
 	"math/big"
 	"strconv"

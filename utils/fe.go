@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"github.com/ttzuef/ot/goot/field/eccgroup"
-	"github.com/ttzuef/ot/goot/field/pfield"
+	"github.com/ttzuesf/goot/field/eccgroup"
+	"github.com/ttzuesf/goot/field/pfield"
 )
 
 type Field_element interface {

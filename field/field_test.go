@@ -1,7 +1,7 @@
 package field
 
 import (
-	"github.com/ttzuef/goot/field/eccgroup"
+	"github.com/ttzuesf/goot/field/eccgroup"
 	"log"
 	"testing"
 )

@@ -2,7 +2,7 @@ package SimpleOT
 
 import (
 	"crypto/rand"
-	"github.com/ttzuef/ot/goot/field/pfield"
+	"github.com/ttzuesf/goot/field/pfield"
 	"log"
 	"sync"
 	"testing"

@@ -4,7 +4,7 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"errors"
-	"github.com/ttzuef/goot/field/Zn"
+	"github.com/ttzuesf/goot/field/Zn"
 	"math/big"
 	"strconv"
 )

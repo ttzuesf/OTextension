@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/ttzuef/goot/field/Zn"
+	"github.com/ttzuesf/goot/field/Zn"
 	"log"
 	"math/big"
 	"os"

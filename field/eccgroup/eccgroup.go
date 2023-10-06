@@ -2,7 +2,9 @@ package eccgroup
 
 import (
 	"crypto/elliptic"
+	"crypto/rand"
 	"errors"
+	"github.com/ttzuef/goot/field/Zn"
 	"math/big"
 	"strconv"
 )
@@ -20,6 +22,7 @@ type Curve struct {
 	N    *big.Int // The order of elliptic curve group
 	zero *big.Int
 	G    *Point //  The base point
+	Zp   *Zn.Zn `json:"zp"`
 }
 
 // Assign a point to another varible
@@ -83,14 +86,15 @@ func (ecf *Curve) Inverse(P *Point) *Point {
 	}
 }
 
-//2P
-
+// 2P
 func (ecf *Curve) Double(x, y *big.Int) (*big.Int, *big.Int) {
 	return ecf.curv.Double(x, y)
 }
-func (ecf *Curve) Sample_field_from_bytes(bitlen int) *Point {
 
-	return nil
+// sample a number
+func (ecf *Curve) SamplePoint() (*big.Int, *Point) {
+	res, _ := rand.Int(rand.Reader, ecf.N)
+	return res, ecf.PowG(res)
 }
 
 // Print() prints field elements
@@ -142,6 +146,14 @@ func (ecf *Curve) Generator() *Point { // return the generator
 func (ecf *Curve) Module() *big.Int { // return the generator
 	res := new(big.Int)
 	res.Set(ecf.P)
+	return res
+}
+
+// Order returns the order of elliptic curve group
+
+func (ecf *Curve) Order() *big.Int { // return the generator
+	res := new(big.Int)
+	res.Set(ecf.N)
 	return res
 }
 

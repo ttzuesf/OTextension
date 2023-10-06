@@ -2,35 +2,15 @@ package pfield
 
 import (
 	"crypto/rand"
-	"encoding/json"
 	"log"
 	"math/big"
 	"testing"
 )
 
-func TestRSAgenerate(t *testing.T) {
+func TestPrimgen(t *testing.T) {
 	n := 128
-	A := new(big.Int)
-	one := big.NewInt(1)
-	two := big.NewInt(2)
-	res := new(big.Int)
-	for {
-		pri, _ := rand.Prime(rand.Reader, n)
-		A = pri
-		res.Mul(A, one)
-		res.Div(res, two)
-		if res.ProbablyPrime(10000) == true {
-			break
-		}
-	}
-	log.Println(A.ProbablyPrime(100000), A.BitLen())
-	a, _ := json.Marshal(A)
-	b := string(a)
-	log.Println("prime number:", b)
-	c := []byte(b)
-	B := new(big.Int)
-	json.Unmarshal(c, B)
-	log.Println(B.Cmp(A))
+	prim := GeneratePrimeNumber(n)
+	log.Println(string(prim.Bytes()))
 }
 
 func TestNewPField(t *testing.T) {

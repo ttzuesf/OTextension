@@ -5,12 +5,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/ttzuef/goot/field/Zn"
 	"log"
 	"math/big"
 	"os"
 )
 
-var Prinumber = map[string]string{ // map Bits length to Prime number
+var Prim = map[string]string{ // map Bits length to Prime number
 	"128": "272569594747777388653931295583358822963",
 	"160": "1371653710411453064923650500888120813710637140787",
 	"256": "95058974245277059354928603316804690503937399282811564918786913047079557400267",
@@ -22,6 +23,7 @@ type Pfield struct {
 	Pr *big.Int `json:"p"` //
 	G  *big.Int `json:"g"` // generator element
 	E  *big.Int `json:"e"` // unit element
+	Zp *Zn.Zn   `json:"zp"`
 	k  int      `json:"secparam"`
 }
 
@@ -53,6 +55,11 @@ func (pf *Pfield) Mul(a *big.Int, b *big.Int) *big.Int {
 func (pf *Pfield) Pow(a *big.Int, num *big.Int) *big.Int {
 	res := new(big.Int)
 	return res.Exp(a, num, pf.Pr)
+}
+
+func (pf *Pfield) PowG(num *big.Int) *big.Int {
+	res := new(big.Int)
+	return res.Exp(pf.G, num, pf.Pr)
 }
 
 // a/b mod p
@@ -120,17 +127,9 @@ func (pf *Pfield) Setbytes(buf []byte) *big.Int {
 	return res.Mod(res, pf.Pr)
 }
 
-func (pf *Pfield) Sample_field_from_bytes(bitlen int) *big.Int {
-	var buf []byte
-	if bitlen <= pf.k {
-		buf = make([]byte, bitlen)
-	} else {
-		buf = make([]byte, pf.k)
-	}
-	rand.Read(buf)
-	res := new(big.Int)
-	res.SetBytes(buf)
-	return res.Mod(res, pf.Pr)
+func (pf *Pfield) SampleNumber() *big.Int {
+	res, _ := rand.Int(rand.Reader, pf.Pr)
+	return res
 }
 
 // Print() prints field elements
@@ -147,11 +146,11 @@ func (pf *Pfield) Cmp(a *big.Int, b *big.Int) int { // compare a and b
 	return a.Cmp(b)
 }
 func (pf *Pfield) Init(secparam string) error {
-	if _, ok := Prinumber[secparam]; ok != true {
+	if _, ok := Prim[secparam]; ok != true {
 		return errors.New("wrong secure parameter")
 	}
 	pr := new(big.Int)
-	err := json.Unmarshal([]byte(Prinumber[secparam]), pr)
+	err := json.Unmarshal([]byte(Prim[secparam]), pr)
 	if err != nil {
 		return err
 	}
@@ -161,9 +160,9 @@ func (pf *Pfield) Init(secparam string) error {
 	return nil
 }
 
-// Generator outputs a generator of Z_{p}
+// Generator outputs a generator of Fp
 func (pf *Pfield) Generator() *big.Int { // generate the generator
-	return pf.G
+	return new(big.Int).Set(pf.G)
 }
 
 func (pf *Pfield) generator() {
@@ -217,4 +216,21 @@ func ImportField(filename string, field *Pfield) error {
 	}
 	field.k = field.Pr.BitLen()
 	return nil
+}
+
+func GeneratePrimeNumber(bitsize int) *big.Int {
+	A := new(big.Int)
+	one := big.NewInt(1)
+	two := big.NewInt(2)
+	res := new(big.Int)
+	for {
+		pri, _ := rand.Prime(rand.Reader, bitsize) //p=2q+1, where q is a prime number
+		res.Mul(pri, one)
+		res.Div(res, two)
+		if res.ProbablyPrime(10000) == true {
+			A.Set(pri)
+			break
+		}
+	}
+	return A
 }

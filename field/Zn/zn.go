@@ -6,17 +6,9 @@ import (
 	"math/big"
 )
 
-var Prinumber = map[string]string{ // map Bits length to Prime number
-	"128": "272569594747777388653931295583358822963",
-	"160": "1371653710411453064923650500888120813710637140787",
-	"256": "95058974245277059354928603316804690503937399282811564918786913047079557400267",
-	"384": "34666891571466416369943876924910218769467850733377910570730343977904586843095453473378334307143259769257458062520919",
-	"512": "13287065567026334171479949288511240572764681181186512239055368174694960248400076929503278747625210562479783021672131635969335480426986245016254367833939343",
-}
-
 type Zn struct {
-	N    *big.Int `json:"n"` //
-	Bits int      `json:"bits"`
+	N    *big.Int `json:"n"`    // prime number
+	Bits int      `json:"bits"` // bits size
 }
 
 func (zn *Zn) Set(src *big.Int) *big.Int { // assign value
@@ -44,12 +36,14 @@ func (zn *Zn) Mul(a *big.Int, b *big.Int) *big.Int {
 	res.Mul(a, b)
 	return res.Mod(res, zn.N)
 }
+
+// x num mod n
 func (zn *Zn) Pow(a *big.Int, num *big.Int) *big.Int {
 	res := new(big.Int)
 	return res.Exp(a, num, zn.N)
 }
 
-// a/b mod p
+// a/b mod n
 func (z *Zn) Div(a *big.Int, b *big.Int) *big.Int {
 	res := new(big.Int)
 	inv := z.Inverse(b)
@@ -96,11 +90,6 @@ func (zn *Zn) Inverse(z *big.Int) *big.Int {
 	}
 	return t0
 }
-func (zn *Zn) Double_pow_mul(g1 *big.Int, x *big.Int, g2, y *big.Int) *big.Int { //g1^{x}g2^{y}
-	a := zn.Pow(g1, x)
-	b := zn.Pow(g2, y)
-	return zn.Mul(a, b)
-}
 
 func (zn *Zn) Module() *big.Int {
 	res := new(big.Int)
@@ -108,23 +97,9 @@ func (zn *Zn) Module() *big.Int {
 	return res
 }
 
-func (zn *Zn) Setbytes(buf []byte) *big.Int {
-	res := new(big.Int)
-	res.SetBytes(buf)
-	return res.Mod(res, zn.N)
-}
-
-func (zn *Zn) SampleNumber(bitlen int) *big.Int {
-	var buf []byte
-	if bitlen <= zn.Bits {
-		buf = make([]byte, bitlen)
-	} else {
-		buf = make([]byte, zn.Bits)
-	}
-	rand.Read(buf)
-	res := new(big.Int)
-	res.SetBytes(buf)
-	return res.Mod(res, zn.N)
+func (zn *Zn) SampleNumber() *big.Int {
+	number, _ := rand.Int(rand.Reader, zn.N)
+	return number
 }
 
 // Cmp(a,b) implement the function to compare number a and b

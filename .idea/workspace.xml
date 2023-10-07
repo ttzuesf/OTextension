@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9976c41c-1537-43ff-a1c7-9f00318edc8c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/crypt/base64.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/field/integer/prime.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/field/integer/prime_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field/Zn/zn.go" beforeDir="false" afterPath="$PROJECT_DIR$/field/Zn/zn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field/eccgroup/eccgroup.go" beforeDir="false" afterPath="$PROJECT_DIR$/field/eccgroup/eccgroup.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/field/pfield/pfield.go" beforeDir="false" afterPath="$PROJECT_DIR$/field/pfield/pfield.go" afterDir="false" />
-    </list>
+    <list default="true" id="9976c41c-1537-43ff-a1c7-9f00318edc8c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
